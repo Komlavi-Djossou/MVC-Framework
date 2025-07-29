@@ -2,14 +2,19 @@ package watchlist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-
+@Comment
+@GoodMovie
 public class WatchlistItem {
 
         private Integer id;
 
         @NotBlank(message = "Please enter the title")
         private String title;
+
+        @Rating
         private String rating;
+
+        @Priority
         private String priority;
 
         @Size(max=50,  message="Comment should be maximum 50 characters")

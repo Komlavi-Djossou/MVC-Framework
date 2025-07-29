@@ -83,6 +83,10 @@ public class WatchlistController {
         WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
 
         if (existingItem == null) {
+           if (itemAlreadyExists(watchlistItem.getTitle())){
+               bindingResult.rejectValue("title", "", "This title already exist on your watchlist");
+                return new ModelAndView("watchlistItemForm");
+           }
             watchlistItem.setId(index++);
             watchlistItems.add(watchlistItem);
         } else {
@@ -113,4 +117,15 @@ public class WatchlistController {
 
         return new ModelAndView(viewName, model);
     }
+
+
+    private boolean itemAlreadyExists(String title) {
+        for (WatchlistItem watchlistItem: watchlistItems){
+            if(watchlistItem.getTitle().equals(title)){
+                return  true;
+            }
+        }
+        return false;
+    }
+
 }
