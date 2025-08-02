@@ -26,6 +26,7 @@ public class WatchlistController {
 
     // Static counter for assigning unique IDs to new WatchlistItems
     private static int index = 1;
+    private static final int MAX_ITEMS = 5;
 
     /**
      * Handles GET requests for the watchlist item form.
@@ -83,10 +84,18 @@ public class WatchlistController {
         WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
 
         if (existingItem == null) {
-           if (itemAlreadyExists(watchlistItem.getTitle())){
-               bindingResult.rejectValue("title", "", "This title already exist on your watchlist");
+
+            // Cross-record validation: Prevent adding more than MAX_ITEMS
+            if (watchlistItems.size() >= MAX_ITEMS) {
+                bindingResult.reject(null, "You can't add more than " + MAX_ITEMS + " movies to your watchlist.");
                 return new ModelAndView("watchlistItemForm");
-           }
+            }
+
+            // Cross-record validation: Prevent duplicate titles
+            if (itemAlreadyExists(watchlistItem.getTitle())){
+                bindingResult.rejectValue("title", "", "This title already exist on your watchlist");
+                return new ModelAndView("watchlistItemForm");
+            }
             watchlistItem.setId(index++);
             watchlistItems.add(watchlistItem);
         } else {
