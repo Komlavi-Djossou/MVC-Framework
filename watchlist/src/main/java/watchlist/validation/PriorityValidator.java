@@ -1,4 +1,4 @@
-package watchlist;
+package watchlist.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

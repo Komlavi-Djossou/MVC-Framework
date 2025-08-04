@@ -1,6 +1,10 @@
-package watchlist;
+package watchlist.domain;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import watchlist.validation.Comment;
+import watchlist.validation.Rating;
+import watchlist.validation.GoodMovie;
+import watchlist.validation.Priority;
 
 @Comment
 @GoodMovie

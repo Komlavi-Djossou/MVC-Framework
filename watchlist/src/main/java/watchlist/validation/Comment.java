@@ -1,7 +1,8 @@
-package watchlist;
+package watchlist.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+
 import java.lang.annotation.*;
 
 @Target(ElementType.TYPE) // Changed from FIELD to TYPE
